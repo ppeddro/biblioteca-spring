@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca Virtual</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <header class="navbar">
+    <!-- Logo da UEG -->
+    <div class="logo">
+      <a href="https://www.app.ueg.br/auth/acesso/index/" target="_blank">
+      <img src="img/ueglogo.png" alt="Logo da UEG" class="logo">
+      </a>
+    </div>
+
+    <!-- Barra de Pesquisa -->
+    <div class="search-container">
+      <input type="text" placeholder="Pesquisar Livro" class="search-input">
+      <button class="search-button">
+        <img src="img/Lupa.png" class="lupa" alt="Lupa">
+      </button>
+    </div>
+
+    <!-- Botão favorito -->
+      <div class="favoritos">
+    <a href="#" title="Favoritos">
+      <img src="img/estrela.png" alt="Ícone de favoritos">
+    </a>
+  </div>
+
+    <!-- Botão do Login -->
+    <div class="login" onclick="abrirModal()">
+      <img src="img\user.png" alt="Ícone de usuário" class="user-icon">
+      <span>Login</span>
+    </div>
+
+    
+  </header>
+
+
+  <main>
+    <!-- Modal de Login/Retângulo central da tela de login -->
+    <div class="modal-overlay" id="modalLogin">
+      <div class="modal">
+        <span class="close-btn" onclick="fecharModal()">&times;</span>
+        <h2>Login</h2>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Senha" required>
+        <button onclick="fazerLogin()">Entrar</button>
+      </div>
+    </div>
+
+  <!-- Aqui os livros aparecerão -->
+  <div id="livros-container" class="livros-grid"></div>
+  </main>
+
+  <script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>

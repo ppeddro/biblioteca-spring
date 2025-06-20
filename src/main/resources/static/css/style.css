@@ -1,0 +1,198 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #FEFAE0;
+  color: #798252;
+  font-family: "Cabin", sans-serif;
+  font-weight: 400;
+}
+
+header {
+  padding: 80px;
+  background-color: #202f60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem; /* padding só nas laterais */
+  box-sizing: border-box;
+}
+
+/* Logo */
+.logo {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo img {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+}
+/* Fim logo */
+
+/* Barra de pesquisa */
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: #3c497c;
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  color: #f3eded;
+  font-size: 1rem;
+  outline: none;
+  margin-left: 0.5rem;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.lupa {
+  width: 30px;
+  height: 30px;
+}
+/* Fim barra de pesquisa */
+
+/* Botão favoritos */
+.favoritos {
+  margin-left: 80rem;
+  cursor: pointer;
+}
+
+.favoritos img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.2s;
+}
+
+/* Botão de login e modal */
+.login {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #eee5e5;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Fundo escurecido do modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo da janela do modal */
+.modal {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 300px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Botão de fechar */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Estilo dos inputs e botão */
+.modal input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #45a049;
+}
+/* Fim modal */
+
+.user-icon {
+  height: 55px;
+}
+
+/* Card do livro */
+.livro-card {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espaçamento entre imagem e texto */
+  border-radius: 10px;
+  padding: 20px;
+  width: 600px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin: 40px;
+  transition: transform 0.2s ease;
+  align-items: flex-start;
+}
+
+.livro-card:hover {
+  transform: scale(1.05);
+}
+
+.livro-card img {
+  width: 180px;
+  border-radius: 5px;
+}
+
+.livro-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.livro-card h2 {
+  color: black;
+  margin: 0;
+}
+
+.livro-card p {
+  color: black;
+  margin: 5px 0 0 0;
+}

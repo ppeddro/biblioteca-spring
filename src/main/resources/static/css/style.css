@@ -11,16 +11,22 @@ body {
   font-weight: 400;
 }
 
-header {
-  padding: 80px;
+header.navbar {
   background-color: #202f60;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 2rem; /* padding só nas laterais */
-  box-sizing: border-box;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 2rem;
+  flex-wrap: wrap; /* ← permite adaptação em telas menores */
 }
 
+.header-esquerda,
+.header-direita {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
 /* Logo */
 .logo {
   cursor: pointer;
@@ -44,8 +50,11 @@ header {
   align-items: center;
   background-color: #3c497c;
   border-radius: 15px;
-  padding: 1rem 2rem;
-  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  max-width: 400px;
+  width: 100%;
+  flex-shrink: 1;
+  max-width: 500px;
 }
 
 .search-input {
@@ -55,12 +64,12 @@ header {
   font-size: 1rem;
   outline: none;
   margin-left: 0.5rem;
+  width: 100%;
 }
 
 .search-button {
   background: none;
   border: none;
-  font-size: 1.2rem;
   cursor: pointer;
 }
 
@@ -72,14 +81,20 @@ header {
 
 /* Botão favoritos */
 .favoritos {
-  margin-left: 80rem;
+  margin-left: 0;
   cursor: pointer;
 }
+@media (max-width: 768px) {
+  .favoritos img {
+    width: 30px;
+    height: 30px;
+  }
+}
 
-.favoritos img {
-  width: 50px;
-  height: 50px;
-  transition: transform 0.2s;
+.favoritos img,
+.login img {
+  width: 60px;
+  height: 60px;
 }
 
 /* Botão de login e modal */
@@ -89,8 +104,14 @@ header {
   gap: 0.5rem;
   color: #eee5e5;
   cursor: pointer;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .login {
+    font-size: 0.9rem;
+  }
 }
 
 /* Fundo escurecido do modal */
@@ -158,41 +179,47 @@ header {
 }
 
 /* Card do livro */
-.livro-card {
-  display: flex;
-  align-items: center;
-  gap: 20px; /* Espaçamento entre imagem e texto */
-  border-radius: 10px;
-  padding: 20px;
-  width: 600px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  margin: 40px;
-  transition: transform 0.2s ease;
-  align-items: flex-start;
+.livros-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 por linha */
+  gap: 2rem;
+  padding: 2rem;
+  justify-items: center;
 }
 
-.livro-card:hover {
+.livro {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 220px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.livro:hover {
   transform: scale(1.05);
 }
 
-.livro-card img {
+.livro img {
   width: 180px;
+  height: auto;
   border-radius: 5px;
+  margin-bottom: 1rem;
 }
 
-.livro-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.livro-card h2 {
+.livro h3 {
   color: black;
   margin: 0;
+  text-align: center;
+  font-size: 1.1rem;
 }
 
-.livro-card p {
+.livro p {
   color: black;
   margin: 5px 0 0 0;
+  font-size: 0.9rem;
+  text-align: center;
 }

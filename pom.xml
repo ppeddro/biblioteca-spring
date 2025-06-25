@@ -56,6 +56,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Segurança -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- Integração Thymeleaf × Spring Security 6 -->
+		<dependency>
+    		<groupId>org.thymeleaf.extras</groupId>
+    		<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

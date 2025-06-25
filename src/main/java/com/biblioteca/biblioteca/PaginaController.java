@@ -36,4 +36,9 @@ public class PaginaController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Isso fará com que o Spring MVC procure por 'login.html' em 'src/main/resources/templates'
+    }
+
 }

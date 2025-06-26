@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biblioteca Virtual</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblioteca Virtual</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-  <header class="navbar">
-    <div class="header-esquerda">
-      <!-- Logo da UEG -->
-      <div class="logo">
-        <a href="https://www.app.ueg.br/auth/acesso/index/" target="_blank">
-        <img src="img/ueglogo.png" alt="Logo da UEG" class="logo">
-        </a>
-      </div>
+    <header class="navbar">
+        <div class="header-esquerda">
+            <div class="logo">
+                <a href="https://www.app.ueg.br/auth/acesso/index/" target="_blank">
+                    <img src="img/ueglogo.png" alt="Logo da UEG" class="logo">
+                </a>
+            </div>
 
-      <!-- Barra de Pesquisa -->
-      <form action="/" method="get" class="search-container">
-        <input type="text" name="q" placeholder="Pesquisar Livro" class="search-input" />
-        <button type="submit" class="search-button">
-          <img src="/img/Lupa.png" class="lupa" alt="Lupa" />
-        </button>
-      </form>
-    </div>
-
-    <div class="header-direita">
-    <div class="favoritos">
-        <a href="#" title="Favoritos">
-            <img src="img/estrela.png" alt="Ícone de favoritos">
-        </a>
-    </div>
-
-    <div class="user-info">
-        <span sec:authorize="isAuthenticated()">
-            Olá, <span sec:authentication="name"></span>!
-            <form th:action="@{/logout}" method="post" style="display:inline-block; margin-left: 10px;">
-                <button type="submit" class="logout-button">Sair</button>
+            <form action="/" method="get" class="search-container">
+                <input type="text" name="q" placeholder="Pesquisar Livro" class="search-input" />
+                <button type="submit" class="search-button">
+                    <img src="/img/Lupa.png" class="lupa" alt="Lupa" />
+                </button>
             </form>
-        </span>
+        </div>
 
-        <span sec:authorize="!isAuthenticated()">
-            <a href="/login" class="login">
-                <img src="img/user.png" alt="Ícone de usuário" class="user-icon">
-                <span>Login</span>
-            </a>
-        </span>
-      </div>
-    </div>
+        <div class="header-direita">
+            <div class="favoritos">
+                <a href="#" title="Favoritos">
+                    <img src="img/estrela.png" alt="Ícone de favoritos">
+                </a>
+            </div>
 
-    
-  </header>
+            <div class="user-info">
+                <span sec:authorize="isAuthenticated()">
+                    Olá, <span sec:authentication="name"></span>!
+                    <form th:action="@{/logout}" method="post" style="display:inline-block; margin-left: 10px;">
+                        <button type="submit" class="logout-button">Sair</button>
+                    </form>
+                </span>
 
+                <span sec:authorize="!isAuthenticated()">
+                    <a href="/login" class="login">
+                        <img src="img/user.png" alt="Ícone de usuário" class="user-icon">
+                        <span>Login</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </header>
 
-  <main>
-    <!-- Modal de Login/Retângulo central da tela de login
-    <div class="modal-overlay" id="modalLogin">
-      <div class="modal">
-        <span class="close-btn" onclick="fecharModal()">&times;</span>
-        <h2>Login</h2>
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Senha" required>
-        <button onclick="fazerLogin()">Entrar</button>
-      </div>
-    </div>
-    -->
+    <main>
+        <div class="livros-container">
+            <div class="livro clickable-card"
+                 th:each="livro : ${livros}"
+                 th:data-titulo="${livro.titulo}"
+                 th:data-autor="${livro.autor}"
+                 th:data-imagem="${livro.imagem}"
+                 th:data-descricao="${livro.descricao}"> <img th:src="${livro.imagem}" alt="Capa do livro">
+                <h3 th:text="${livro.titulo}"></h3>
+                <p th:text="${livro.autor}"></p>
+            </div>
+        </div>
 
-  <!-- Aqui os livros aparecerão -->
-  <div class="livros-container">
-  <div class="livro" th:each="livro : ${livros}">
-    <img th:src="${livro.imagem}" alt="Capa do livro">
-    <h3 th:text="${livro.titulo}"></h3>
-    <p th:text="${livro.autor}"></p>
-  </div>
-</div>
-  </main>
+        <div id="livroModal" class="modal-overlay" style="display: none;">
+          <div class="modal livro-modal">
+            <span class="close-btn">&times;</span>
+        
+            <span class="modal-star-icon" id="modalStarIcon">&#9733;</span> 
+        
+            <div class="modal-imagem-container">
+              <img id="modalLivroImagem" src="" alt="Capa do Livro">
+            </div>
 
-  <script th:src="@{/js/script.js}"></script>
+            <div class="modal-conteudo-texto">
+              <h2 id="modalLivroTitulo"></h2>
+              <p id="modalLivroAutor"></p>
+              <p id="modalLivroDescricao"></p>
+              </div>
+          </div>
+        </div>
+    </main>
 
+    <script th:src="@{/js/script.js}"></script>
 </body>
 </html>

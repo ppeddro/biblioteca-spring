@@ -28,7 +28,13 @@ public class PaginaController {
                 String titulo = info.getTitle();
                 String autor = (info.getAuthors() != null) ? String.join(", ", info.getAuthors()) : "Autor desconhecido";
                 String imagem = (info.getImageLinks() != null) ? info.getImageLinks().getThumbnail() : "";
-                return new Livro(titulo, autor, imagem);
+
+                // --- AQUI É A MUDANÇA: OBTENDO A DESCRIÇÃO ---
+                // A descrição pode não existir para todos os livros, então verifique se é null
+                String descricao = (info.getDescription() != null) ? info.getDescription() : "Descrição não disponível.";
+
+                // --- AQUI É A MUDANÇA: PASSANDO A DESCRIÇÃO PARA O CONSTRUTOR ---
+                return new Livro(titulo, autor, imagem, descricao);
             })
             .collect(Collectors.toList());
 
@@ -38,7 +44,7 @@ public class PaginaController {
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // Isso fará com que o Spring MVC procure por 'login.html' em 'src/main/resources/templates'
+        return "login";
     }
 
 }

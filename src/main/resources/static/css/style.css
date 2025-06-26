@@ -1,94 +1,94 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  background-color: #FEFAE0;
-  color: #798252;
-  font-family: "Cabin", sans-serif;
-  font-weight: 400;
+    background-color: #FEFAE0;
+    color: #798252;
+    font-family: "Cabin", sans-serif;
+    font-weight: 400;
 }
 
 header.navbar {
-  background-color: #202f60;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  gap: 2rem;
-  flex-wrap: wrap; /* ← permite adaptação em telas menores */
+    background-color: #202f60;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    gap: 2rem;
+    flex-wrap: wrap; /* permite adaptação em telas menores */
 }
 
 .header-esquerda,
 .header-direita {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 /* Logo */
 .logo {
-  cursor: pointer;
-  transition: transform 0.2s;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
 .logo:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .logo img {
-  height: 90px;
-  width: auto;
-  object-fit: contain;
+    height: 90px;
+    width: auto;
+    object-fit: contain;
 }
 /* Fim logo */
 
 /* Barra de pesquisa */
 .search-container {
-  display: flex;
-  align-items: center;
-  background-color: #3c497c;
-  border-radius: 15px;
-  padding: 0.5rem 1rem;
-  max-width: 400px;
-  width: 100%;
-  flex-shrink: 1;
-  max-width: 500px;
+    display: flex;
+    align-items: center;
+    background-color: #3c497c;
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    max-width: 400px;
+    width: 100%;
+    flex-shrink: 1;
+    /* max-width: 500px; - Duplicado, removido */
 }
 
 .search-input {
-  border: none;
-  background: transparent;
-  color: #f3eded;
-  font-size: 1rem;
-  outline: none;
-  margin-left: 0.5rem;
-  width: 100%;
+    border: none;
+    background: transparent;
+    color: #f3eded;
+    font-size: 1rem;
+    outline: none;
+    margin-left: 0.5rem;
+    width: 100%;
 }
 
 .search-button {
-  background: none;
-  border: none;
-  cursor: pointer;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .lupa {
-  width: 30px;
-  height: 30px;
+    width: 30px;
+    height: 30px;
 }
 /* Fim barra de pesquisa */
 
-/* Botão favoritos */
+/* Botão favoritos (no header) */
 .favoritos {
-  margin-left: 0;
-  cursor: pointer;
+    margin-left: 0;
+    cursor: pointer;
 }
 @media (max-width: 768px) {
-  .favoritos img {
-    width: 30px;
-    height: 30px;
-  }
+    .favoritos img {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 /* Botão de login e modal (o .login original, que aparece quando deslogado) */
@@ -110,7 +110,6 @@ header.navbar {
 }
 
 /* O ícone de usuário para ambos os estados (logado/deslogado) */
-/* Combinei .favoritos img, .login img e .user-icon para controlar melhor */
 .favoritos img,
 .header-direita .user-info img { /* Aplica-se ao ícone no favoritos E no user-info */
     width: 35px; /* Tamanho padrão para ícones no header-direita */
@@ -183,108 +182,232 @@ header.navbar {
     transform: translateY(0); /* Retorna à posição original */
 }
 
-/* Fundo escurecido do modal 
+/* --- ESTILOS DO MODAL DE DETALHOS DO LIVRO --- */
+
+/* Fundo escurecido do modal (overlay) - manter o mesmo */
 .modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 999;
-  justify-content: center;
-  align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-*/
-/* Estilo da janela do modal
-.modal {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  width: 300px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+
+.modal-overlay[style*="display: flex"] {
+    opacity: 1;
+    visibility: visible;
 }
-*/
-/* Botão de fechar 
+
+/* Estilo da janela do modal de detalhes do livro - manter o mesmo */
+.modal.livro-modal {
+    background: #FEFAE0;
+    color: #333;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal-overlay[style*="display: flex"] .modal.livro-modal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Container para a imagem da capa - manter o mesmo */
+.modal-imagem-container {
+    flex-shrink: 0;
+    width: 200px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Imagem da capa no modal - manter o mesmo */
+.modal.livro-modal #modalLivroImagem {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Container para o conteúdo de texto (título, autor, descrição) - manter o mesmo */
+.modal-conteudo-texto {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    position: relative;
+    padding-right: 50px;
+}
+
+/* Título do livro - manter o mesmo */
+.modal.livro-modal #modalLivroTitulo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #202f60;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+/* Autor do livro - manter o mesmo */
+.modal.livro-modal #modalLivroAutor {
+    font-size: 1.2rem;
+    color: #798252;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+/* Descrição do livro - manter o mesmo */
+.modal.livro-modal #modalLivroDescricao {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: justify;
+    color: #555;
+    margin-bottom: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Botão de fechar do modal - manter o mesmo */
 .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-*/
-/* Estilo dos inputs e botão 
-.modal input {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.2s ease;
 }
 
-.modal button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.close-btn:hover {
+    color: #333;
 }
 
-.modal button:hover {
-  background-color: #45a049;
+/* --- ESTRELA DE FAVORITO (O NOVO "BOTÃO") --- */
+.modal-star-icon {
+    position: absolute;
+    top: 40px; /* Ajuste a posição vertical como desejar */
+    right: 10px; /* Alinhe à direita */
+    font-size: 32px; /* Tamanho da estrela */
+    cursor: pointer;
+    color: #f0f0f0; /* Estrela branca (ou cinza bem claro) quando não favoritada */
+    transition: color 0.2s ease;
+    text-shadow: 0 0 5px rgba(0,0,0,0.1); /* Pequena sombra para dar profundidade */
 }
-/* Fim modal */
+
+/* Estado de FAVORITADO: Quando a estrela tem a classe 'favorited' */
+.modal-star-icon.favorited {
+    color: #FFD700; /* Cor amarela quando favoritada */
+    text-shadow: 0 0 8px rgba(255,215,0,0.5); /* Sombra amarela quando favoritada */
+}
+
+.modal-star-icon:hover {
+    color: #dedede; /* Um pouco mais escura ao passar o mouse, para feedback visual */
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDADE - manter o mesmo --- */
+@media (max-width: 768px) {
+    .modal.livro-modal {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .modal-imagem-container {
+        width: 150px;
+    }
+
+    .modal-conteudo-texto {
+        align-items: center;
+        text-align: center;
+    }
+
+    .modal.livro-modal #modalLivroTitulo,
+    .modal.livro-modal #modalLivroAutor,
+    .modal.livro-modal #modalLivroDescricao {
+        text-align: center;
+    }
+
+    .close-btn {
+        position: absolute; /* Mantenha absoluto para não bagunçar o layout mobile aqui */
+        top: 10px;
+        right: 10px;
+    }
+    .modal-star-icon { /* Mantenha absoluto para não bagunçar o layout mobile aqui */
+        position: absolute;
+        top: 40px; /* Ajuste para não colidir com o X */
+        right: 10px;
+    }
+}
+
 
 /* Card do livro */
 .livros-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 por linha */
-  gap: 2rem;
-  padding: 2rem;
-  justify-items: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 por linha */
+    gap: 2rem;
+    padding: 2rem;
+    justify-items: center;
 }
 
 .livro {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  width: 220px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 220px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer; /* Adicionado para indicar que é clicável */
 }
 
 .livro:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .livro img {
-  width: 180px;
-  height: auto;
-  border-radius: 5px;
-  margin-bottom: 1rem;
+    width: 180px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 1rem;
 }
 
 .livro h3 {
-  color: black;
-  margin: 0;
-  text-align: center;
-  font-size: 1.1rem;
+    color: black;
+    margin: 0;
+    text-align: center;
+    font-size: 1.1rem;
 }
 
 .livro p {
-  color: black;
-  margin: 5px 0 0 0;
-  font-size: 0.9rem;
-  text-align: center;
+    color: black;
+    margin: 5px 0 0 0;
+    font-size: 0.9rem;
+    text-align: center;
 }
